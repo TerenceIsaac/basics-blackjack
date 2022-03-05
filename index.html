@@ -41,8 +41,8 @@
 
     <!-- sharing configuration -->
     <!-- Primary Meta Tags -->
-    <title>Blackjack - Basics - Rocket Academy</title>
-    <meta name="title" content="YOURNAME's BlackJack Game!" />
+    <title>Blackjack - Basics with Rocket Academy</title>
+    <meta name="title" content="TERENCE's BlackJack Game!" />
     <meta name="description" content="A fun card game I made myself! 😄💪🌈" />
 
     <!-- Open Graph / Facebook -->
@@ -51,7 +51,7 @@
       property="og:url"
       content="https://rocketacademy.github.io/basics-blackjack/index.html"
     />
-    <meta property="og:title" content="YOURNAME's BlackJack Game!" />
+    <meta property="og:title" content="TERENCE's BlackJack Game!" />
     <meta
       property="og:description"
       content="A fun card game I made myself! 😄💪🌈"
@@ -67,7 +67,7 @@
       name="twitter:url"
       content="https://rocketacademy.github.io/basics-blackjack/index.html"
     />
-    <meta name="twitter:title" content="YOURNAME's BlackJack Game!" />
+    <meta name="twitter:title" content="TERENCE's BlackJack Game!" />
     <meta
       name="twitter:description"
       content="A fun card game I made myself! 😄💪🌈"
@@ -115,7 +115,7 @@
       }
 
       #container {
-        background-color: pink;
+        background-color: rgba(192, 251, 255, 0.705);
         margin: 40px auto;
         max-width: 800px;
         padding: 38px 31px;
@@ -137,7 +137,7 @@
       }
 
       #output-div {
-        background-color: lightgrey;
+        background-color: rgba(12, 241, 165, 0.979);
         margin: 20px auto;
         padding: 20px;
         width: 100%;
@@ -172,29 +172,49 @@
     </h1>
     <h1 class="header">♣️ Basics - Blackjack ♠️</h1>
     <div id="container">
-      <p>Input:</p>
+      <!-- <p>Input:</p>
       <input id="input-field" />
-      <br />
-      <button id="submit-button">Submit</button>
-      <p>Output:</p>
+      <br /> -->
+      <button id="Start">Start</button>
+      <button id="Hit">Hit</button>
+      <button id="Stand">Stand</button>
+      <p>Voilà:</p>
       <div id="output-div"></div>
     </div>
     <!-- Import program logic -->
     <script src="script.js"></script>
     <!-- Define button click functionality -->
     <script>
-      var button = document.querySelector("#submit-button");
+      var button = document.querySelector("#Start");
       button.addEventListener("click", function () {
-        // Set result to input value
-        var input = document.querySelector("#input-field");
-        var result = main(input.value);
+        // // Set result to input value
+        // var input = document.querySelector("#input-field");
+        var result = main();
 
         // Display result in output element
         var output = document.querySelector("#output-div");
         output.innerHTML = result;
 
-        // Reset input value
-        input.value = "";
+        // // Reset input value
+        // input.value = "";
+      });
+
+      var button = document.querySelector("#Hit");
+      button.addEventListener("click", function () {
+        // Set result to input value
+        var result1 = hit();
+        // Display result in output element
+        var output = document.querySelector("#output-div");
+        output.innerHTML = result1;
+      });
+
+      var button = document.querySelector("#Stand");
+      button.addEventListener("click", function () {
+        // Set result to input value
+        var result2 = stand();
+        // Display result in output element
+        var output = document.querySelector("#output-div");
+        output.innerHTML = result2;
       });
     </script>
   </body>
