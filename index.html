@@ -97,7 +97,7 @@
         margin-right: 30px;
         background-color: white;
         color: black; /* sets the font color */
-        background-image: url(""); /* The image used */
+        background-image: url("https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg&ga=GA1.2.963793037.1635897600"); /* The image used */
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Do not repeat the image */
         background-size: cover; /* Resize the background image to cover the entire container */
@@ -115,7 +115,7 @@
       }
 
       #container {
-        background-color: rgba(192, 251, 255, 0.705);
+        /* background-color: white; */
         margin: 40px auto;
         max-width: 800px;
         padding: 38px 31px;
@@ -137,7 +137,7 @@
       }
 
       #output-div {
-        background-color: rgba(12, 241, 165, 0.979);
+        background-color: rgb(255, 255, 255);
         margin: 20px auto;
         padding: 20px;
         width: 100%;
@@ -179,7 +179,12 @@
       <button id="Hit">Hit</button>
       <button id="Stand">Stand</button>
       <p>Voilà:</p>
-      <div id="output-div"></div>
+      <div id="output-div">
+        Welcome To Terence's BlackJack. Hit Start to Begin.
+        <br /><br />
+        <br />
+        <img src="https://c.tenor.com/d6OIKbtU88sAAAAC/maverick-cards.gif" />
+      </div>
     </div>
     <!-- Import program logic -->
     <script src="script.js"></script>
@@ -202,7 +207,10 @@
       var button = document.querySelector("#Hit");
       button.addEventListener("click", function () {
         // Set result to input value
-        var result1 = hit();
+        //run hit function
+        hit();
+        // run hitresult function and assign to output
+        var result1 = hitresult();
         // Display result in output element
         var output = document.querySelector("#output-div");
         output.innerHTML = result1;

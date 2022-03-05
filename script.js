@@ -4,11 +4,15 @@ var computerCard = [];
 var GameOverOutputValue;
 var playerWinCount = 0;
 var computerWinCount = 0;
+var WinningImage =
+  '<img src="https://c.tenor.com/4IxtijQfVnEAAAAC/baby-scream-yeah.gif"/>';
+var LosingImage =
+  '<img src= "https://c.tenor.com/LaS8ciJZFDAAAAAC/baby-cry.gif"/>';
 
 var makeDeck = function () {
   // create the empty deck at the beginning
   var carddeck = [];
-  var suits = ["❤", "🔷", "♣", "♠"];
+  var suits = ["❤", "🔷", "♣", "♠️"];
 
   var suitIndex = 0;
   while (suitIndex < suits.length) {
@@ -24,16 +28,16 @@ var makeDeck = function () {
 
       // for BlackJack only, change the card rank for the face cards to 10.
       if (cardName == 1) {
-        cardName = "ace";
+        cardName = "Ace";
       } else if (cardName == 11) {
         rankCounter = 10;
-        cardName = "jack";
+        cardName = "Jack";
       } else if (cardName == 12) {
         rankCounter = 10;
-        cardName = "queen";
+        cardName = "Queen";
       } else if (cardName == 13) {
         rankCounter = 10;
-        cardName = "king";
+        cardName = "King";
       }
 
       // make a single card object variable
@@ -105,7 +109,6 @@ var CountHand = function (Player) {
 };
 
 //define player and computer Hand in string
-
 var showHand = function (input) {
   var index = 0;
   var myOutputValue = "";
@@ -160,7 +163,7 @@ var main = function (input) {
       playerCard
     )} <br> ${myOutputValueComputer(
       computerCard
-    )} <br> Player wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount}  `;
+    )} <br> Player wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount} <br><br> ${WinningImage}   `;
     // restart game + new deck
     playerCard = [];
     computerCard = [];
@@ -174,7 +177,7 @@ var main = function (input) {
       playerCard
     )} <br> ${myOutputValueComputer(
       computerCard
-    )} <br> Computer wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount}`;
+    )} <br> Computer wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount} <br><br> ${LosingImage}`;
     // restart game + new deck
     playerCard = [];
     computerCard = [];
@@ -188,7 +191,7 @@ var main = function (input) {
       playerCard
     )} <br> ${myOutputValueComputer(
       computerCard
-    )} <br> Player wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount}  `;
+    )} <br> Player wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount} <br><br> ${WinningImage}  `;
     // restart game + new deck
     playerCard = [];
     computerCard = [];
@@ -201,10 +204,14 @@ var main = function (input) {
   }
 };
 
-// hit button
+// hit button to draw card
 var hit = function () {
   drawCard(playerCard);
+};
 
+// evaluate hit result together with button in index.html
+var hitresult = function () {
+  // if player hit and 21
   if (CountHand(playerCard) == 21) {
     playerWinCount = playerWinCount + 1;
 
@@ -212,26 +219,28 @@ var hit = function () {
       playerCard
     )} <br> ${myOutputValueComputer(
       computerCard
-    )} <br> Player wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount}  `;
+    )} <br> Player wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount} <br><br> ${WinningImage}   `;
     // restart game + new deck
     playerCard = [];
     computerCard = [];
     cardDeck = shuffleCards(makeDeck());
 
     return GameOverOutputValue;
-  } else if (CountHand(playerCard) < 21) {
+  } // if player hit and <21, he can hit again
+  else if (CountHand(playerCard) < 21) {
     return `Player: <br> ${showHand(playerCard)}  <br> Score: ${CountHand(
       playerCard
     )}. <br>
     Input "hit" to draw 1 card or <br> "stand" to tap.`;
-  } else if (CountHand(playerCard) > 21) {
+  } // if player hit and bust
+  else if (CountHand(playerCard) > 21) {
     computerWinCount = computerWinCount + 1;
 
     GameOverOutputValue = `${myOutputValuePlayer(
       playerCard
     )} <br> ${myOutputValueComputer(
       computerCard
-    )} <br> Computer wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount}`;
+    )} <br> Computer wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount} <br><br> ${LosingImage}`;
 
     // restart game + new deck
     playerCard = [];
@@ -244,28 +253,45 @@ var hit = function () {
 
 // stand button
 var stand = function () {
-  if (CountHand(playerCard) > CountHand(computerCard)) {
+  //if player has 5 cards <21
+  if (CountHand(playerCard) < 21 && playerCard.length == 5) {
     playerWinCount = playerWinCount + 1;
 
     GameOverOutputValue = `${myOutputValuePlayer(
       playerCard
     )} <br> ${myOutputValueComputer(
       computerCard
-    )} <br> Player wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount}  `;
+    )} <br> Player wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount} <br><br> ${WinningImage}   `;
     // restart game + new deck
     playerCard = [];
     computerCard = [];
     cardDeck = shuffleCards(makeDeck());
 
     return GameOverOutputValue;
-  } else if (CountHand(playerCard) < CountHand(computerCard)) {
+  } // if player stand and more than computer
+  else if (CountHand(playerCard) > CountHand(computerCard)) {
+    playerWinCount = playerWinCount + 1;
+
+    GameOverOutputValue = `${myOutputValuePlayer(
+      playerCard
+    )} <br> ${myOutputValueComputer(
+      computerCard
+    )} <br> Player wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount} <br><br> ${WinningImage}  `;
+    // restart game + new deck
+    playerCard = [];
+    computerCard = [];
+    cardDeck = shuffleCards(makeDeck());
+
+    return GameOverOutputValue;
+  } // if player stand but less than computer
+  else if (CountHand(playerCard) < CountHand(computerCard)) {
     computerWinCount = computerWinCount + 1;
 
     GameOverOutputValue = `${myOutputValuePlayer(
       playerCard
     )} <br> ${myOutputValueComputer(
       computerCard
-    )} <br> Computer wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount}`;
+    )} <br> Computer wins. <br> Player Wins: ${playerWinCount}. Computer Wins: ${computerWinCount} <br><br> ${LosingImage}`;
 
     // restart game + new deck
     playerCard = [];
@@ -273,7 +299,8 @@ var stand = function () {
     cardDeck = shuffleCards(makeDeck());
 
     return GameOverOutputValue;
-  } else if (CountHand(playerCard) == CountHand(computerCard)) {
+  } //if player stands and same as computer
+  else if (CountHand(playerCard) == CountHand(computerCard)) {
     GameOverOutputValue = `${myOutputValuePlayer(
       playerCard
     )} <br> ${myOutputValueComputer(
