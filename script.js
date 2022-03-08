@@ -9,6 +9,11 @@ var WinningImage =
 var LosingImage =
   '<img src= "https://c.tenor.com/LaS8ciJZFDAAAAAC/baby-cry.gif"/>';
 
+// Disable other buttons
+document.querySelector("#Start").disabled = false;
+document.querySelector("#Hit").disabled = true;
+document.querySelector("#Stand").disabled = true;
+
 var makeDeck = function () {
   // create the empty deck at the beginning
   var carddeck = [];
@@ -136,7 +141,11 @@ var myOutputValueComputer = function (input) {
 
 var main = function (input) {
   // Initiate dealing at start game - deal card to player and PC each one-by-one
+
   if (playerCard.length == 0) {
+    document.querySelector("#Start").disabled = false;
+    document.querySelector("#Hit").disabled = true;
+    document.querySelector("#Stand").disabled = true;
     drawCard(playerCard);
     drawCard(computerCard);
     drawCard(playerCard);
@@ -157,6 +166,9 @@ var main = function (input) {
   // if player 21 or computer 21 with 2 cards, else give player option to hit or stand
   // whenver wins, restart deck and game.
   if (CountHand(playerCard) == 21) {
+    document.querySelector("#Start").disabled = false;
+    document.querySelector("#Hit").disabled = true;
+    document.querySelector("#Stand").disabled = true;
     playerWinCount = playerWinCount + 1;
 
     GameOverOutputValue = `${myOutputValuePlayer(
@@ -171,6 +183,9 @@ var main = function (input) {
 
     return GameOverOutputValue;
   } else if (CountHand(computerCard == 21)) {
+    document.querySelector("#Start").disabled = false;
+    document.querySelector("#Hit").disabled = true;
+    document.querySelector("#Stand").disabled = true;
     computerWinCount = computerWinCount + 1;
 
     GameOverOutputValue = `${myOutputValuePlayer(
@@ -185,6 +200,9 @@ var main = function (input) {
 
     return GameOverOutputValue;
   } else if (CountHand(computerCard) > 21) {
+    document.querySelector("#Start").disabled = false;
+    document.querySelector("#Hit").disabled = true;
+    document.querySelector("#Stand").disabled = true;
     playerWinCount = playerWinCount + 1;
 
     GameOverOutputValue = `${myOutputValuePlayer(
@@ -199,6 +217,9 @@ var main = function (input) {
 
     return GameOverOutputValue;
   } else if (CountHand(playerCard) < 21) {
+    document.querySelector("#Start").disabled = true;
+    document.querySelector("#Hit").disabled = false;
+    document.querySelector("#Stand").disabled = false;
     return `${myOutputValuePlayer(playerCard)} <br>
     Click "Hit" to draw 1 card or <br> "Stand" to tap.`;
   }
@@ -213,6 +234,9 @@ var hit = function () {
 var hitresult = function () {
   // if player hit and 21
   if (CountHand(playerCard) == 21) {
+    document.querySelector("#Start").disabled = false;
+    document.querySelector("#Hit").disabled = true;
+    document.querySelector("#Stand").disabled = true;
     playerWinCount = playerWinCount + 1;
 
     GameOverOutputValue = `${myOutputValuePlayer(
@@ -228,12 +252,18 @@ var hitresult = function () {
     return GameOverOutputValue;
   } // if player hit and <21, he can hit again
   else if (CountHand(playerCard) < 21) {
+    document.querySelector("#Start").disabled = true;
+    document.querySelector("#Hit").disabled = false;
+    document.querySelector("#Stand").disabled = false;
     return `Player: <br> ${showHand(playerCard)}  <br> Score: ${CountHand(
       playerCard
     )}. <br>
     Input "hit" to draw 1 card or <br> "stand" to tap.`;
   } // if player hit and bust
   else if (CountHand(playerCard) > 21) {
+    document.querySelector("#Start").disabled = false;
+    document.querySelector("#Hit").disabled = true;
+    document.querySelector("#Stand").disabled = true;
     computerWinCount = computerWinCount + 1;
 
     GameOverOutputValue = `${myOutputValuePlayer(
@@ -255,6 +285,9 @@ var hitresult = function () {
 var stand = function () {
   //if player has 5 cards <21
   if (CountHand(playerCard) < 21 && playerCard.length == 5) {
+    document.querySelector("#Start").disabled = false;
+    document.querySelector("#Hit").disabled = true;
+    document.querySelector("#Stand").disabled = true;
     playerWinCount = playerWinCount + 1;
 
     GameOverOutputValue = `${myOutputValuePlayer(
@@ -270,6 +303,9 @@ var stand = function () {
     return GameOverOutputValue;
   } // if player stand and more than computer
   else if (CountHand(playerCard) > CountHand(computerCard)) {
+    document.querySelector("#Start").disabled = false;
+    document.querySelector("#Hit").disabled = true;
+    document.querySelector("#Stand").disabled = true;
     playerWinCount = playerWinCount + 1;
 
     GameOverOutputValue = `${myOutputValuePlayer(
@@ -285,6 +321,9 @@ var stand = function () {
     return GameOverOutputValue;
   } // if player stand but less than computer
   else if (CountHand(playerCard) < CountHand(computerCard)) {
+    document.querySelector("#Start").disabled = false;
+    document.querySelector("#Hit").disabled = true;
+    document.querySelector("#Stand").disabled = true;
     computerWinCount = computerWinCount + 1;
 
     GameOverOutputValue = `${myOutputValuePlayer(
@@ -301,6 +340,9 @@ var stand = function () {
     return GameOverOutputValue;
   } //if player stands and same as computer
   else if (CountHand(playerCard) == CountHand(computerCard)) {
+    document.querySelector("#Start").disabled = false;
+    document.querySelector("#Hit").disabled = true;
+    document.querySelector("#Stand").disabled = true;
     GameOverOutputValue = `${myOutputValuePlayer(
       playerCard
     )} <br> ${myOutputValueComputer(
